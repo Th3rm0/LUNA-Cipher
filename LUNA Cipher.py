@@ -9,10 +9,7 @@ the shift used as it encrypts the message. The LUNA Cipher is based on the same 
 encryption, the whole message is put through the Polybius Cipher.
 '''
 
-# Just to use sys.exit(1)
-import sys
-
-# Encryptes using TESS1
+# Encrypts using TESS
 def encryptionTess(phrase, shift, verbose=False):
     
     # Contains the encrypted phrase
