@@ -7,8 +7,6 @@ This is the LUNA Cipher. LUNA is an acryonym for Layered Unbreakable Numerical A
 The TESS Cipher (Transformational Enhanced Shift System) used a modified version of the Ceaser Cipher which increases
 the shift used as it encrypts the message. The LUNA Cipher is based on the same principle, however, at the very end of the
 encryption, the whole message is put through the Polybius Cipher.
-
-No value greater than 1 billion may be entered for the shift value due to limitations in the code
 '''
 
 # Just to use sys.exit(1)
@@ -172,55 +170,23 @@ def decryptionPolybius(phrase, verbose=False):
 # Uses both methods of encryption, as well as tacking on the shift value as well as how long the shift is
 def totalEncryption(phrase, shift, verbose=False):
 
-    # Checks if the shift value is greater or equal to 1 billion. If it is, it stops the program
-    if shift > 999999999:
-
-        print("Error: Please do not attempt to encrypt with a shift equal or greater than 1 billion")
-        sys.exit(1)
-
     # Encrypts the phrase using TESS
     encryptedPhraseTess = encryptionTess(phrase, shift, verbose)
 
     # Encrypts the phrase using the Polybius Square and adds the shift value as well as how long the shift is
-    encryptedPhrasePolybius = encryptionPolybius(encryptedPhraseTess, verbose) + str(shift) + str(len(str(shift)))
+    encryptedPhrasePolybius = encryptionPolybius(encryptedPhraseTess, verbose)
 
     # Returns the totally encrypted phrase
     return encryptedPhrasePolybius
 
 # Uses both methods of decryption
-def totalDecryption(phrase, verbose=False):
-
-    # Gets how long the shift value is
-    charLength = int(phrase[-1])
-
-    # Keeps track of the shift value
-    shiftValue = ""
-
-    # Finds the shift value from the end of the phrase
-    for i in range(charLength - 1, -1, -1):
-
-        shiftValue += phrase[-(i +2)]
-
-    # Translates the shift value from a string to an integer
-    shiftValue = int(shiftValue)
-
-    # Checks if the shift value is greater or equal to 1 billion. If it is, it stops the program
-    if shiftValue > 999999999:
-
-        print("\n---------- ERROR ----------")
-        print("Do not enter a number greater than 999,999,999 as the shift value")
-        print("---------- ERROR ----------")
-
-        sys.exit(1)
-
-    # Removes the tacked on shift value as well as how long the shift is from the phrase
-    phrase = phrase.replace(str(shiftValue) + str(charLength), "")
+def totalDecryption(phrase, shift, verbose=False):
 
     # Decrypts using the Polybius Square
-    polybiusDecryption = decryptionPolybius(phrase, verbose)
+    polybiusDecryption = decryptionPolybius(phrase, shift, verbose)
 
     # Decrypts using TESS
-    tessDecryption = decryptionTess(polybiusDecryption, shiftValue, verbose)
+    tessDecryption = decryptionTess(polybiusDecryption, shift, verbose)
 
     # Returns the decrypted phrase
     return tessDecryption
@@ -264,77 +230,48 @@ columnEncryptionCharacters = "01234"
 
 # Takes user input to encrypt or decrypt
 encryptOrDecrypt = input("Do you want to encrypt or decrypt? (e/d): ")
-fileOption = input("Do you want to encrypt or decrypt a file? (y/n) ")
 
-# Option to encrypt
-if encryptOrDecrypt == "e" and fileOption == 'n':
+# Takes the user's message
+message = input("\nPlease input message: ")
 
-    # Takes the user message to encrypt
-    message = input("\nPlease input message: ")
+# Takes user input for the shift value
+shift = int(input("\nPlease input shift: "))
 
-    # Takes user input for the shift value
-    shift = int(input("\nPlease input shift: "))
+# Determines if to print verbose output
+verboseInput = input("\nVerbose? (y/n): ")
 
-    # Checks if the shift value is invalid
-    if shift > 999999999:
-
-        print("\n---------- ERROR ----------")
-        print("Do not enter a number greater than 999,999,999 as the shift value")
-        print("---------- ERROR ----------")
-
-        sys.exit(1)
-
-    # Determines if to print verbose output
-    verboseInput = input("\nVerbose? (y/n): ")
-
-    if verboseInput == "y":
+if verboseInput == "y":
 
         verbose = True
         
-    elif verboseInput == "n":
+elif verboseInput == "n":
 
-        verbose = False
-
-    else:
-
-        print("Invalid input. Verbose is set to false.")
-        verbose = False
-
-    # Formatting
-    print()
-
-    encryptedMessage = totalEncryption(message, shift, verbose)
-
-    print(f"\nEncrypted Message: {encryptedMessage}")
-
-# Option to decrypt
-elif encryptOrDecrypt == "d" and fileOption == 'n':
-
-    message = input("\nPlease input message: ")
-
-    # Determines if to print verbose output
-    verboseInput = input("\nVerbose? (y/n): ")
-
-    if verboseInput == "y":
-
-        verbose = True
-        
-    elif verboseInput == "n":
-
-        verbose = False
-
-    else:
-
-        print("Invalid input. Verbose is set to false.")
-        verbose = False
-
-    # Formatting
-    print()
-
-    decryptedMessage = totalDecryption(message, verbose)
-
-    print(f"\nDecrypted Message: {decryptedMessage}")
+    verbose = False
 
 else:
 
-    print("\nInvalid input.")
+    print("Invalid input. Verbose is set to false.")
+
+    verbose = False
+
+# Option to encrypt
+if encryptOrDecrypt == "e":
+
+    # Encrypts the message
+    encryptedMessage = totalEncryption(message, shift, verbose)
+
+    # Prints the encrypted message
+    print(f"\n\nEncrypted Message: {encryptedMessage}")
+
+# Option to decrypt
+elif encryptOrDecrypt == "d":
+
+    # Decrypts the message
+    decryptedMessage = totalDecryption(message, verbose)
+
+    # Prints the decrypted message
+    print(f"\n\nDecrypted Message: {decryptedMessage}")
+
+else:
+
+    print("\n\nInvalid input.")
