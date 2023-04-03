@@ -16,10 +16,10 @@ if one wishes to decrypt a file.
 Because of this, the LUNAF Cipher can take any positive integer value up to the maximum bite value.
 
 1.0 (31/03/2023) -
-Created the LUNAF Cipher with file encryption and decryption capabilities. No extra abilities
+Created the LUNAF Cipher with file encryption and decryption capabilities.
 
 1.1 (03/04/2023)-
-Added support for partial encryption by only using TESS
+Added support for partial encryption only using TESS
 '''
 
 # Encrypts the file using LUNA
