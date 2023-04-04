@@ -8,3 +8,4 @@ NOTES:
  - The verbose output for decryption is not working for LUNA
  - The shift value is stored in the encrypted message for LUNA (not LUNAF)
    - To this extent, I would like to add an option to embed the shift or not
+ - The code for LUNA is kinda garbage right now, I would like to recode it
