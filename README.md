@@ -4,4 +4,7 @@ This is the LUNA Cipher. LUNA is an acryonym for Layered Unbreakable Numerical A
 
 There is an additional version called LUNAF (Layered Unbreakable Numerical Algorithm for Files). This version of LUNA intakes a file and a shift value, and outputs an encrypted file.
 
-NOTE: Currently, the verbose input for decrypting is not working
+NOTES:
+ - The verbose output for decryption is not working for LUNA
+ - The shift value is stored in the encrypted message for LUNA (not LUNAF)
+   - To this extent, I would like to add an option to embed the shift or not
