@@ -1,4 +1,4 @@
-﻿
+
 /*
 #### Caleb Ha, 23/03/2023
 # LUNA Cipher
@@ -8,7 +8,8 @@ The TESS Cipher (Transformational Enhanced Shift System) used a modified version
 the shift used as it encrypts the message. The LUNA Cipher is based on the same principle, however, at the very end of the
 encryption, the whole message is put through the Polybius Cipher.
 
-No value greater than 1 billion may be entered for the shift value due to limitations in the code
+Refrain from using any numbers for shift values greater than the size of characterSet, as this is based off of a Ceaser Cipher this will cause the
+encryption algorithm to begin repeating. This can be mitigated by using an enlarged characterSet
 */
 
 using System;
@@ -48,8 +49,9 @@ namespace LUNA
             string[] inputs = getInput();
 
             string phrase = inputs[0];
+
             int shift = Convert.ToInt32(inputs[1]);
-       
+
             string encryptedTess = encryptionTess(characterSet, phrase, shift);
             Console.WriteLine(encryptedTess);
 
@@ -186,10 +188,25 @@ namespace LUNA
             string[] inputs = new string[2];
 
             Console.Write("Input text: ");
-            inputs[0] = Console.ReadLine();
+            inputs[0] = Console.ReadLine()!;
+
+            if (inputs[0] == "")
+            {
+                inputs[0] = "MESSAGE UNDEFINED";
+            }
 
             Console.Write("Input shift: ");
-            inputs[1] = Console.ReadLine();
+            inputs[1] = Console.ReadLine()!;
+
+            try
+            {
+                Convert.ToInt32(inputs[1]);
+            }
+            catch
+            {
+                Console.WriteLine("!!! SHIFT UNDEFINED. SHIFT WILL DEFAULT TO 0 !!!");
+                inputs[1] = "0";
+            }
 
             return inputs;
         }
