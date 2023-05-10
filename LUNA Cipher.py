@@ -265,10 +265,9 @@ columnEncryptionCharacters = "01234"
 
 # Takes user input to encrypt or decrypt
 encryptOrDecrypt = input("Do you want to encrypt or decrypt? (e/d): ")
-fileOption = input("Do you want to encrypt or decrypt a file? (y/n) ")
 
 # Option to encrypt
-if encryptOrDecrypt == "e" and fileOption == 'n':
+if encryptOrDecrypt == "e":
 
     # Takes the user message to encrypt
     message = input("\nPlease input message: ")
