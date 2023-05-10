@@ -1,7 +1,6 @@
-
 /*
-#### Caleb Ha, 23/03/2023
-# LUNA Cipher
+Caleb Ha, 09/05/2023
+LUNA Cipher
 
 This is the LUNA Cipher. LUNA is an acryonym for Layered Unbreakable Numerical Algorithm. This cipher will be based upon a previous cipher I created named the TESS Cipher.
 The TESS Cipher (Transformational Enhanced Shift System) used a modified version of the Ceaser Cipher which increases
@@ -53,17 +52,16 @@ namespace LUNA
             int shift = Convert.ToInt32(inputs[1]);
 
             string encryptedTess = encryptionTess(characterSet, phrase, shift);
-            Console.WriteLine(encryptedTess);
-
             string encryptedPolybius = encryptionPolybius(polybiusSquare, polybiusRowKey, polybiusColumnKey, encryptedTess);
-            Console.WriteLine($"Encrypted: {encryptedPolybius}");
-
             string decryptedPolybius = decryptionPolybius(polybiusSquare, polybiusRowKey, polybiusColumnKey, encryptedPolybius);
-            Console.WriteLine($"Decrypted: {decryptedPolybius}");
-
             string decryptedTess = decryptionTess(characterSet, decryptedPolybius, shift);
-            Console.WriteLine(decryptedTess);
+
+            Console.WriteLine($"Encrypted TESS: {encryptedTess}");
+            Console.WriteLine($"Encrypted Polybius: {encryptedPolybius}");
+            Console.WriteLine($"Decrypted Polybius: {decryptedPolybius}");
+            Console.WriteLine($"Decrypted TESS: {decryptedTess}");
         }
+        
         static string encryptionTess(char[] characterSet, string phrase, int shift)
         {
             string encryptedPhrase = "";
