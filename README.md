@@ -9,3 +9,5 @@ NOTES:
  - The shift value is stored in the encrypted message for LUNA (not LUNAF)
    - To this extent, I would like to add an option to embed the shift or not
  - The code for LUNA is kinda garbage right now, I would like to recode it
+
+Please keep in mind this is *not* a serious attempt at encryption, but rather a personal project that I work on as I try to pick up the basics of languages.
